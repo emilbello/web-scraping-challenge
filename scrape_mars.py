@@ -82,7 +82,8 @@ def scrape():
 # visit the USGS Astrogeology url 
     url_h = 'https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars'
     browser.visit(url_h)
-
+    time.sleep(1)
+    
     # soupifying..
     html = browser.html
     soup = bs(html, 'html.parser')
@@ -111,7 +112,7 @@ def scrape():
         # navigating back to previous url
         browser.back()
 
-    mars['hemisphere_image_urls'] = hemisphere_image_urls
+    mars['hemisphere'] = hemisphere_image_urls
     
 
     return mars
