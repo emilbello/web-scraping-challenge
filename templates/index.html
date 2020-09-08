@@ -33,7 +33,7 @@
             <div class="col-md-4">
                 <h5 class="font-weight-bold">Mars Facts</h5>
                 <div class="table-responsive">
-                    {{ mars.mars_facts }}
+                   {{ mars.mars_facts|safe }}
                 </div>
             </div>
         </div>
@@ -43,24 +43,16 @@
             <div class="col-md-12">
                 <h1 class="font-weight-bold">Mars Hemispheres</h1>
             </div>
+            {% for i in mars.hemisphere %} 
             <div class="col-md-6">
-                {% for i in mars.hemisphere %} 
-                <div class="card" style="width: 18rem;">
-                    <img class="card-img-top" src={{ i.img_url }} width=50% alt={{ i.name }}>
+                <div class="card" style="border: black;">
+                    <img class="card-img-top" src={{ i.img_url }} width=99% style="padding: 5px; border: black;" alt={{ i.name }}>
                     <div class="card-body">
                         <h2 class="card-title">{{ i.name }}</h2>
                     </div>
                 </div>
-                {% endfor %}
-                <!-- {% for key, value in mars[hemisphere] %} 
-                <div class="card" style="width: 18rem;">
-                    <img class="card-img-top" src={{ mars.hemisphere.img_url }} width=50% alt={{ mars.hemisphere.name }}>
-                    <div class="card-body">
-                        <h2 class="card-title">{{ mars.hemisphere.name }}</h2>
-                    </div>
-                </div>
-                {% endfor %} -->
             </div>
+            {% endfor %}
     </div>
         
 </body>
