@@ -63,6 +63,57 @@ def scrape():
 
     mars['featured_image_url'] = soup_img.body.img['src']
 
+    ### Mars Facts ###
+    table_url = 'https://space-facts.com/mars/'
+
+    # reading tables in pandas
+    tables = pd.read_html(table_url)
+    # reading the first table listed
+    mars_facts = tables[0]
+    # renaming columns
+    mars_facts = mars_facts.rename(columns={0:'Description', 1:'Mars'})
+    # setting new index
+    mars_facts.set_index('Description', inplace=True)
+    # getting html table format
+    mars['mars_facts'] = mars_facts.to_html()
+
+    ### Mars Hemispheres ###
+
+# visit the USGS Astrogeology url 
+    url_h = 'https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars'
+    browser.visit(url_h)
+
+    # soupifying..
+    html = browser.html
+    soup = bs(html, 'html.parser')
+    # retrieving the titles within the div, class=item, found in h3 element
+    items = soup.select('div.item div.description h3')
+
+    hemisphere_image_urls = []
+    # looping throught items
+
+    for item in items:
+        
+        list_dict = {}
+
+        # finding and clicking on the element holding Hemisphere (Splinter)
+        browser.find_by_text(item.text).click()
+        # finding the image:
+        image = browser.find_by_text('Sample').first
+        
+        # adding k, v to the list_dict
+        list_dict['name'] = item.text
+        list_dict['img_url'] = image['href']
+        
+        # appending results to the list
+        hemisphere_image_urls.append(list_dict)
+    
+        # navigating back to previous url
+        browser.back()
+
+    mars['hemisphere_image_urls'] = hemisphere_image_urls
+    
+
     return mars
 
 
