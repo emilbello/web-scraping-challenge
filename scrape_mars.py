@@ -75,11 +75,11 @@ def scrape():
     # setting new index
     mars_facts.set_index('Description', inplace=True)
     # getting html table format
-    mars['mars_facts'] = mars_facts.to_html()
+    mars['mars_facts'] = mars_facts.to_html(classes="table table-bordered table-hover table-striped table-sm")
 
     ### Mars Hemispheres ###
 
-# visit the USGS Astrogeology url 
+    # visit the USGS Astrogeology url 
     url_h = 'https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars'
     browser.visit(url_h)
     time.sleep(1)

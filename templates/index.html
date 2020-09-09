@@ -33,7 +33,9 @@
             <div class="col-md-4">
                 <h5 class="font-weight-bold">Mars Facts</h5>
                 <div class="table-responsive">
-                   {{ mars.mars_facts|safe }}
+                    <!-- <table class="table table-bordered table-hover table-striped table-sm"> -->
+                    {{ mars.mars_facts|safe }}
+                    <!-- </table> -->
                 </div>
             </div>
         </div>
@@ -45,10 +47,10 @@
             </div>
             {% for i in mars.hemisphere %} 
             <div class="col-md-6">
-                <div class="card" style="border: black;">
-                    <img class="card-img-top" src={{ i.img_url }} width=99% style="padding: 5px; border: black;" alt={{ i.name }}>
+                <div class="card border">
+                    <img class="card-img-top" src={{ i.img_url }} width=99% alt={{ i.name }}>
                     <div class="card-body">
-                        <h2 class="card-title">{{ i.name }}</h2>
+                        <h3 class="card-title">{{ i.name }}</h3>
                     </div>
                 </div>
             </div>
